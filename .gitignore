@@ -8,3 +8,6 @@ TerraformTries/terraform.tfstate.backup
 TerraformTries/instance.tf
 TerraformTries/out.terraform
 TerraformTries/terraform.tfstate
+terraform-test/.terraform.lock.hcl
+terraform-test/terraform.tfstate
+terraform-test/terraform.tfstate.backup
