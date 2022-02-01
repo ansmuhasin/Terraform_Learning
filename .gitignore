@@ -3,3 +3,8 @@ terraform-test/mykey.pub
 terraform-test/terraform.tfvars
 terraform-test/.terraform/providers/registry.terraform.io/hashicorp/aws/3.70.0/windows_amd64/terraform-provider-aws_v3.70.0_x5.exe
 TerraformTries/.terraform/providers/registry.terraform.io/hashicorp/aws/3.73.0/windows_amd64/terraform-provider-aws_v3.73.0_x5.exe
+TerraformTries/.terraform.lock.hcl
+TerraformTries/terraform.tfstate.backup
+TerraformTries/instance.tf
+TerraformTries/out.terraform
+TerraformTries/terraform.tfstate
