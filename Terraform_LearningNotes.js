@@ -73,3 +73,69 @@ resource "aws_instance" "firstInstance"{
 //+ run terraform init first
 //+ then we can run terraform apply, it will ask to confirm all the actions
 //+ type yes to confirm. then it will create the resourse abd shhow the message
+
+
+//! Lost the topics 😥
+
+//! provisioning on windows
+//+ add a new ami for wwindows.
+//+ need extra parameter user_data
+//* user_data     = <<EOF
+//* <powershell>
+//* net user ${var.INSTANCE_USERNAME} '${var.INSTANCE_PASSWORD}' /add /y
+//* net localgroup administrators ${var.INSTANCE_USERNAME} /add
+//*
+//* winrm quickconfig -q
+//* winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="300"}'
+//* winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+//* winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+//* winrm set winrm/config/service/auth '@{Basic="true"}'
+//*
+//* netsh advfirewall firewall add rule name="WinRM 5985" protocol=TCP dir=in localport=5985 action=allow
+//* netsh advfirewall firewall add rule name="WinRM 5986" protocol=TCP dir=in localport=5986 action=allow
+//*
+//* net stop winrm
+//* sc.exe config winrm start=auto
+//* net start winrm
+//* </powershell>
+//* EOF
+
+//+ we are adding a powershell script. and adding a user and password. and adding to admin group
+//+ and we are configuring winrm, use to upload and execute the files
+//+ and we are allowing the port. stop winrm and start winrm
+//+ connection type is winrm. and user is the user we created and the password
+//+ mention the proper file name and destination. remove the provition execute
+
+//+ apply the changes. this will create the instance. and we can login to it using remote desctop
+//+ we can connect as admin password with extra steps needed. watch vid
+
+
+//! Output
+//+ we can return or output the results
+output "ip"{
+  value = aws_instance.firstInstance.public_ip
+}
+
+//! Terraform state.
+//+ first we need to configure aws in the cli.
+//+ we can run aws configure
+//+ we can see the credentials at cat ~/.aws/credentials   . thats where amazon stores the data
+//+ we need to create a backed file. and then configure the backend
+terraform {
+  backend "s3" {
+    bucket = "terraform-state-d65d"
+    key="terraform/demo"
+  }
+}
+//+ terraform init. might ask region if we dont give
+
+//! DataSources
+//+ we can add the data and it will be available for use
+data "aws_ip_ranges" "european_ec2" {
+  regions  = ["eu-west-1", "eu-central-1"]
+  services = ["ec2"]
+}
+//+ we can use it like this
+data.aws_ip_ranges.european_ec2.cidr_blocks
+
+//! Template providers

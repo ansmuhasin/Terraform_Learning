@@ -11,3 +11,7 @@ TerraformTries/terraform.tfstate
 terraform-test/.terraform.lock.hcl
 terraform-test/terraform.tfstate
 terraform-test/terraform.tfstate.backup
+provisioning-with-windows/terraform.tfvars
+terraform-provisioning-ubundu/terraform.tfvars
+provisioning-with-windows/.terraform/providers/registry.terraform.io/hashicorp/aws/3.74.0/windows_amd64/terraform-provider-aws_v3.74.0_x5.exe
+terraform-provisioning-ubundu/.terraform/providers/registry.terraform.io/hashicorp/aws/3.70.0/windows_amd64/terraform-provider-aws_v3.70.0_x5.exe
